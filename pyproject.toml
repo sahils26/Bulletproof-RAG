@@ -1,0 +1,21 @@
+[project]
+name = "bulletproof-rag"
+version = "0.1.0"
+description = "A self-correcting, observable, continuously-evaluated RAG system."
+requires-python = ">=3.11"
+dependencies = []
+
+[tool.uv.workspace]
+members = [
+    "deeprag",
+    "agentguard",
+    "eval-harness",
+    "dashboard"
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=8.0.0",
+    "ruff>=0.3.0",
+    "mypy>=1.8.0"
+]
