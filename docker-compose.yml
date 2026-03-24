@@ -2,40 +2,36 @@ services:
   app:
     build: .
     volumes:
-      - .:/app
-    environment:
-      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
-      - VECTOR_STORE=chromadb
-    env_file:
-      - .env
+      - ./packages:/app/packages
     depends_on:
-      - chromadb
-      - redis
-      - postgres
+      chromadb:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    environment:
+      - VECTOR_URL=http://chromadb:8000
 
   chromadb:
     image: chromadb/chroma:latest
     ports:
       - "8000:8000"
     volumes:
-      - chromadb_data:/chroma/data
+      - chroma_data:/chroma/chroma
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/api/v1/heartbeat"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
   redis:
-    image: redis:alpine
+    image: redis:7-alpine
     ports:
       - "6379:6379"
-
-  postgres:
-    image: postgres:15-alpine
-    environment:
-      - POSTGRES_USER=user
-      - POSTGRES_PASSWORD=pass
-      - POSTGRES_DB=bulletproof
-    ports:
-      - "5432:5432"
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
 volumes:
-  chromadb_data:
-  postgres_data:
+  chroma_data:

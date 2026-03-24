@@ -1,10 +1,31 @@
-# Python-generated files
+# Byte-compiled / optimized / cached files
 __pycache__/
-*.py[oc]
-build/
-dist/
-wheels/
-*.egg-info
+*.py[cod]
+*$py.class
 
 # Virtual environments
-.venv
+.venv/
+venv/
+
+# Distribution
+dist/
+build/
+*.egg-info/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Environment
+.env
+
+# Caches
+.mypy_cache/
+.ruff_cache/
+.pytest_cache/
+
+# Data
+chroma_data/
+*.db

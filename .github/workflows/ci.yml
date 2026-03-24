@@ -2,30 +2,29 @@ name: CI
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   pull_request:
-    branches: [ main ]
+    branches: [main]
 
 jobs:
-  lint-and-test:
+  quality:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
 
-      - name: Install uv
-        run: curl -LsSf https://astral.sh/uv/install.sh | sh
-
-      - name: Set up Python
-        run: uv python install
+      - uses: astral-sh/setup-uv@v4
 
       - name: Install dependencies
         run: uv sync --all-extras --dev
 
-      - name: Run Ruff (Linting)
+      - name: Lint (Ruff)
         run: uv run ruff check .
 
-      - name: Run Mypy (Type Checking)
-        run: uv run mypy .
+      - name: Format check (Ruff)
+        run: uv run ruff format --check .
 
-      - name: Run Pytest (Testing)
-        run: uv run pytest
+      - name: Type check (Mypy)
+        run: uv run mypy packages/
+
+      - name: Tests (Pytest)
+        run: uv run pytest --tb=short

@@ -2,20 +2,40 @@
 name = "bulletproof-rag"
 version = "0.1.0"
 description = "A self-correcting, observable, continuously-evaluated RAG system."
-requires-python = ">=3.11"
-dependencies = []
-
-[tool.uv.workspace]
-members = [
+requires-python = ">=3.12"
+dependencies = [
+    "shared",
     "deeprag",
     "agentguard",
     "eval-harness",
-    "dashboard"
+    "dashboard",
 ]
+
+[tool.uv.sources]
+shared = { workspace = true }
+deeprag = { workspace = true }
+agentguard = { workspace = true }
+eval-harness = { workspace = true }
+dashboard = { workspace = true }
+
+[tool.uv.workspace]
+members = ["packages/*"]
 
 [dependency-groups]
 dev = [
     "pytest>=8.0.0",
     "ruff>=0.3.0",
-    "mypy>=1.8.0"
+    "mypy>=1.8.0",
 ]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+select = ["E", "F", "I", "UP", "B", "SIM"]
+
+[tool.mypy]
+python_version = "3.12"
+
+[tool.pytest.ini_options]
+testpaths = ["packages"]
+asyncio_mode = "auto"
