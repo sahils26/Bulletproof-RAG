@@ -6,14 +6,14 @@ with them: log, stream to SSE, forward via MCP, or ignore. No tight coupling.
 """
 
 from collections.abc import Awaitable, Callable
-from datetime import datetime, timezone
-from enum import Enum
+from datetime import UTC, datetime
+from enum import StrEnum
 from typing import Any
 
 from pydantic import BaseModel, Field
 
 
-class ProgressEventType(str, Enum):
+class ProgressEventType(StrEnum):
     """Types of progress events emitted throughout the pipeline."""
 
     QUERY_RECEIVED = "query_received"
@@ -35,7 +35,7 @@ class ProgressEvent(BaseModel):
 
     event_type: ProgressEventType = Field(description="What just happened.")
     timestamp: datetime = Field(
-        default_factory=lambda: datetime.now(timezone.utc),
+        default_factory=lambda: datetime.now(UTC),
         description="When this event was emitted.",
     )
     message: str = Field(default="", description="Human-readable status message.")

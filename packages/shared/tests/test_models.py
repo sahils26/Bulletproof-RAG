@@ -1,22 +1,30 @@
 """Tests for shared models — serialization, validation, enums, and defaults."""
 
 import json
-import pytest
-from uuid import UUID
 from datetime import datetime
+from uuid import UUID
 
+import pytest
 from pydantic import ValidationError
-
 from shared.models import (
-    Document, Chunk,
-    Query, QueryType, ScoredChunk, RetrievalResult,
-    GenerationResult, ResponseType, Citation,
-    TraceSpan, Budget, CircuitState, SpanStatus,
-    ProgressEvent, ProgressEventType,
+    Budget,
+    Chunk,
+    CircuitState,
+    Citation,
+    Document,
+    GenerationResult,
+    ProgressEvent,
+    ProgressEventType,
+    Query,
+    QueryType,
+    ResponseType,
+    RetrievalResult,
+    SpanStatus,
+    TraceSpan,
 )
 
-
 # ── Document & Chunk ────────────────────────────────────────────
+
 
 class TestDocument:
     def test_auto_id_and_timestamp(self):
@@ -55,6 +63,7 @@ class TestChunk:
 
 # ── Retrieval ───────────────────────────────────────────────────
 
+
 class TestQueryType:
     def test_enum_serialization(self):
         q = Query(text="What is X?", query_type=QueryType.FACTUAL)
@@ -80,6 +89,7 @@ class TestRetrievalResult:
 
 # ── Generation ──────────────────────────────────────────────────
 
+
 class TestResponseType:
     def test_abstention_enum(self):
         result = GenerationResult(
@@ -101,6 +111,7 @@ class TestResponseType:
 
 # ── Tracing ─────────────────────────────────────────────────────
 
+
 class TestTracing:
     def test_span_defaults(self):
         span = TraceSpan(operation="retrieve")
@@ -119,6 +130,7 @@ class TestTracing:
 
 
 # ── Events ──────────────────────────────────────────────────────
+
 
 class TestEvents:
     def test_event_creation(self):
@@ -141,6 +153,7 @@ class TestEvents:
 
 
 # ── Validation errors ──────────────────────────────────────────
+
 
 class TestValidation:
     def test_document_requires_content(self):

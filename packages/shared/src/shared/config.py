@@ -59,9 +59,7 @@ class EmbeddingConfig(BaseSettings):
 class PipelineConfig(BaseSettings):
     """RAG pipeline behaviour configuration."""
 
-    max_iterations: int = Field(
-        default=3, description="Max self-correction loops."
-    )
+    max_iterations: int = Field(default=3, description="Max self-correction loops.")
     relevance_threshold: float = Field(
         default=3.0, description="Minimum relevance score (1–5) to pass grading."
     )

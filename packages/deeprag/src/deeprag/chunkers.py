@@ -1,17 +1,16 @@
 """Chunking strategies: SlidingWindow, RecursiveCharacter, SemanticParagraph."""
 
-import uuid
 import re
 from abc import ABC, abstractmethod
-from typing import List
 
-from shared.models import Document, Chunk
+from shared.models import Chunk, Document
 
 
 def _safe_count_tokens(text: str) -> int:
     """Count tokens using tiktoken. Falls back to word-based estimate if unavailable."""
     try:
         from shared.utils.tokens import count_tokens
+
         return count_tokens(text)
     except ImportError:
         # Fallback: rough estimate of ~0.75 tokens per word
@@ -22,7 +21,7 @@ class Chunker(ABC):
     """Abstract interface for document chunking strategies."""
 
     @abstractmethod
-    def chunk(self, doc: Document) -> List[Chunk]:
+    def chunk(self, doc: Document) -> list[Chunk]:
         """Split a Document into a list of Chunks."""
         pass
 
@@ -34,7 +33,7 @@ class SlidingWindowChunker(Chunker):
         self.chunk_size = chunk_size
         self.overlap = overlap
 
-    def chunk(self, doc: Document) -> List[Chunk]:
+    def chunk(self, doc: Document) -> list[Chunk]:
         if not doc.content.strip():
             return []
 
@@ -55,7 +54,7 @@ class SlidingWindowChunker(Chunker):
                         document_id=doc.id,
                         chunk_index=index,
                         token_count=_safe_count_tokens(segment),
-                        metadata=metadata
+                        metadata=metadata,
                     )
                 )
         return chunks
@@ -71,13 +70,13 @@ class RecursiveCharacterChunker(Chunker):
         self,
         chunk_size: int = 1000,
         overlap: int = 200,
-        separators: List[str] | None = None,
+        separators: list[str] | None = None,
     ):
         self.chunk_size = chunk_size
         self.overlap = overlap
         self.separators = separators or ["\n\n", "\n", " ", ""]
 
-    def chunk(self, doc: Document) -> List[Chunk]:
+    def chunk(self, doc: Document) -> list[Chunk]:
         if not doc.content.strip():
             return []
 
@@ -88,10 +87,17 @@ class RecursiveCharacterChunker(Chunker):
         index = 0
 
         for segment in text_segments:
-            if current_chunk_text and len(current_chunk_text) + len(segment) > self.chunk_size:
-                chunks.append(self._create_chunk(doc, current_chunk_text.strip(), index))
+            if (
+                current_chunk_text
+                and len(current_chunk_text) + len(segment) > self.chunk_size
+            ):
+                chunks.append(
+                    self._create_chunk(doc, current_chunk_text.strip(), index)
+                )
                 index += 1
-                overlap_text = current_chunk_text[-self.overlap :] if self.overlap > 0 else ""
+                overlap_text = (
+                    current_chunk_text[-self.overlap :] if self.overlap > 0 else ""
+                )
                 current_chunk_text = overlap_text + segment
             else:
                 current_chunk_text += segment
@@ -101,7 +107,7 @@ class RecursiveCharacterChunker(Chunker):
 
         return chunks
 
-    def _split_text(self, text: str, separators: List[str]) -> List[str]:
+    def _split_text(self, text: str, separators: list[str]) -> list[str]:
         """Split text on the first matching separator."""
         separator = separators[-1]
         for s in separators:
@@ -141,7 +147,7 @@ class SemanticParagraphChunker(Chunker):
     def __init__(self, max_length: int = 2000):
         self.max_length = max_length
 
-    def chunk(self, doc: Document) -> List[Chunk]:
+    def chunk(self, doc: Document) -> list[Chunk]:
         if not doc.content.strip():
             return []
 

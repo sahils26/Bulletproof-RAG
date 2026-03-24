@@ -1,12 +1,14 @@
-import pytest
-import os
 import docx
-from pypdf import PdfWriter
-
+import pytest
 from deeprag.loaders import (
-    PlainTextLoader, MarkdownLoader, PDFLoader, DOCXLoader,
-    LoaderRegistry, UnsupportedFileTypeError, default_registry,
+    DOCXLoader,
+    MarkdownLoader,
+    PDFLoader,
+    PlainTextLoader,
+    UnsupportedFileTypeError,
+    default_registry,
 )
+from pypdf import PdfWriter
 
 
 @pytest.fixture
@@ -19,7 +21,10 @@ def sample_text_file(tmp_path):
 @pytest.fixture
 def sample_md_file(tmp_path):
     p = tmp_path / "sample.md"
-    p.write_text("# Main Header\nSome intro text.\n## Sub Header\nMore details.", encoding="utf-8")
+    p.write_text(
+        "# Main Header\nSome intro text.\n## Sub Header\nMore details.",
+        encoding="utf-8",
+    )
     return str(p)
 
 

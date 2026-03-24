@@ -1,6 +1,6 @@
 """Document and Chunk models — the core data structures for RAG ingestion."""
 
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from typing import Any
 from uuid import UUID, uuid4
 
@@ -26,7 +26,7 @@ class Document(BaseModel):
         default=None, description="Filesystem path or URI the document was loaded from."
     )
     created_at: datetime = Field(
-        default_factory=lambda: datetime.now(timezone.utc),
+        default_factory=lambda: datetime.now(UTC),
         description="Timestamp when the document was created.",
     )
 
@@ -41,13 +41,19 @@ class Chunk(BaseModel):
 
     id: UUID = Field(default_factory=uuid4, description="Unique chunk identifier.")
     content: str = Field(description="The text content of this chunk.")
-    document_id: UUID = Field(description="ID of the parent Document this chunk belongs to.")
+    document_id: UUID = Field(
+        description="ID of the parent Document this chunk belongs to."
+    )
     metadata: dict[str, Any] = Field(
         default_factory=dict,
         description="Inherited document metadata plus chunk-specific info.",
     )
-    chunk_index: int = Field(description="Position of this chunk within the parent document.")
-    token_count: int = Field(default=0, description="Accurate token count (via tiktoken).")
+    chunk_index: int = Field(
+        description="Position of this chunk within the parent document."
+    )
+    token_count: int = Field(
+        default=0, description="Accurate token count (via tiktoken)."
+    )
     embedding: list[float] | None = Field(
         default=None, description="Vector embedding (populated after embedding step)."
     )

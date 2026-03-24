@@ -1,14 +1,14 @@
 """Tracing and budget models — observability and resource management."""
 
-from datetime import datetime, timezone
-from enum import Enum
+from datetime import UTC, datetime
+from enum import StrEnum
 from typing import Any
 from uuid import UUID, uuid4
 
 from pydantic import BaseModel, Field
 
 
-class SpanStatus(str, Enum):
+class SpanStatus(StrEnum):
     """Status of a completed trace span."""
 
     OK = "ok"
@@ -17,7 +17,7 @@ class SpanStatus(str, Enum):
     BUDGET_EXCEEDED = "budget_exceeded"
 
 
-class CircuitState(str, Enum):
+class CircuitState(StrEnum):
     """Circuit breaker state for protecting external resources.
 
     - CLOSED: everything is healthy, requests flow normally.
@@ -41,19 +41,25 @@ class TraceSpan(BaseModel):
     parent_id: UUID | None = Field(
         default=None, description="Parent span ID (None for root spans)."
     )
-    operation: str = Field(description="Name of the operation (e.g. 'retrieve', 'generate').")
+    operation: str = Field(
+        description="Name of the operation (e.g. 'retrieve', 'generate')."
+    )
     start_time: datetime = Field(
-        default_factory=lambda: datetime.now(timezone.utc),
+        default_factory=lambda: datetime.now(UTC),
         description="When this span started.",
     )
     duration_ms: float | None = Field(
         default=None, description="Duration in milliseconds (set on completion)."
     )
-    status: SpanStatus = Field(default=SpanStatus.OK, description="Outcome of the operation.")
+    status: SpanStatus = Field(
+        default=SpanStatus.OK, description="Outcome of the operation."
+    )
     metadata: dict[str, Any] = Field(
         default_factory=dict, description="Operation-specific metadata."
     )
-    token_count: int = Field(default=0, description="Tokens consumed by this operation.")
+    token_count: int = Field(
+        default=0, description="Tokens consumed by this operation."
+    )
     cost_usd: float = Field(default=0.0, description="Estimated cost in USD.")
 
 

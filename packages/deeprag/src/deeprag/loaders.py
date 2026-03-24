@@ -1,14 +1,13 @@
 import os
-from abc import ABC, abstractmethod
-from typing import List
-from pathlib import Path
 import re
+from abc import ABC, abstractmethod
 
 from shared.models import Document
 
 
 class UnsupportedFileTypeError(Exception):
     """Raised when no loader is registered for a given file extension."""
+
     pass
 
 
@@ -16,12 +15,12 @@ class DocumentLoader(ABC):
     """Abstract interface for all document loaders."""
 
     @abstractmethod
-    def load(self, path: str) -> List[Document]:
+    def load(self, path: str) -> list[Document]:
         """Load text from the given path and return a list of Documents."""
         pass
 
     @abstractmethod
-    def supported_extensions(self) -> List[str]:
+    def supported_extensions(self) -> list[str]:
         """Return list of file extensions this loader handles (e.g. ['.txt'])."""
         pass
 
@@ -29,14 +28,14 @@ class DocumentLoader(ABC):
 class PlainTextLoader(DocumentLoader):
     """Loads a simple `.txt` file."""
 
-    def supported_extensions(self) -> List[str]:
+    def supported_extensions(self) -> list[str]:
         return [".txt"]
 
-    def load(self, path: str) -> List[Document]:
+    def load(self, path: str) -> list[Document]:
         if not os.path.exists(path):
             raise FileNotFoundError(f"File not found: {path}")
 
-        with open(path, "r", encoding="utf-8") as f:
+        with open(path, encoding="utf-8") as f:
             text = f.read()
 
         doc = Document(
@@ -54,14 +53,14 @@ class PlainTextLoader(DocumentLoader):
 class MarkdownLoader(DocumentLoader):
     """Loads a `.md` file and extracts top-level headers into metadata."""
 
-    def supported_extensions(self) -> List[str]:
+    def supported_extensions(self) -> list[str]:
         return [".md", ".markdown"]
 
-    def load(self, path: str) -> List[Document]:
+    def load(self, path: str) -> list[Document]:
         if not os.path.exists(path):
             raise FileNotFoundError(f"File not found: {path}")
 
-        with open(path, "r", encoding="utf-8") as f:
+        with open(path, encoding="utf-8") as f:
             text = f.read()
 
         headers = re.findall(r"^(#{1,6})\s+(.+)$", text, re.MULTILINE)
@@ -83,10 +82,10 @@ class MarkdownLoader(DocumentLoader):
 class PDFLoader(DocumentLoader):
     """Loads text from `.pdf` files using pypdf."""
 
-    def supported_extensions(self) -> List[str]:
+    def supported_extensions(self) -> list[str]:
         return [".pdf"]
 
-    def load(self, path: str) -> List[Document]:
+    def load(self, path: str) -> list[Document]:
         import pypdf
 
         if not os.path.exists(path):
@@ -118,16 +117,16 @@ class PDFLoader(DocumentLoader):
             )
             return [doc]
         except Exception as e:
-            raise RuntimeError(f"Failed to load PDF {path}: {str(e)}")
+            raise RuntimeError(f"Failed to load PDF {path}: {str(e)}") from e
 
 
 class DOCXLoader(DocumentLoader):
     """Loads text from `.docx` files using python-docx."""
 
-    def supported_extensions(self) -> List[str]:
+    def supported_extensions(self) -> list[str]:
         return [".docx"]
 
-    def load(self, path: str) -> List[Document]:
+    def load(self, path: str) -> list[Document]:
         import docx
 
         if not os.path.exists(path):
@@ -144,13 +143,16 @@ class DOCXLoader(DocumentLoader):
                 content=full_text,
                 metadata={
                     "source": path,
-                    "file_type": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+                    "file_type": (
+                        "application/vnd.openxmlformats-officedocument."
+                        "wordprocessingml.document"
+                    ),
                     "filename": os.path.basename(path),
                 },
             )
             return [doc]
         except Exception as e:
-            raise RuntimeError(f"Failed to load DOCX {path}: {str(e)}")
+            raise RuntimeError(f"Failed to load DOCX {path}: {str(e)}") from e
 
 
 class LoaderRegistry:
@@ -164,7 +166,7 @@ class LoaderRegistry:
         for ext in loader.supported_extensions():
             self._loaders[ext.lower()] = loader
 
-    def load(self, path: str) -> List[Document]:
+    def load(self, path: str) -> list[Document]:
         """Load a file by dispatching to the correct loader based on extension."""
         ext = os.path.splitext(path)[1].lower()
         if ext not in self._loaders:

@@ -1,7 +1,14 @@
 """Tests for shared config system — defaults and environment overrides."""
 
 import os
-from shared.config import AppConfig, LLMConfig, VectorStoreConfig, EmbeddingConfig, PipelineConfig
+
+from shared.config import (
+    AppConfig,
+    EmbeddingConfig,
+    LLMConfig,
+    PipelineConfig,
+    VectorStoreConfig,
+)
 
 
 class TestConfigDefaults:

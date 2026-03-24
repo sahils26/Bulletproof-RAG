@@ -1,6 +1,6 @@
 """Retrieval-related models — queries, scored chunks, and retrieval results."""
 
-from enum import Enum
+from enum import StrEnum
 from typing import Any
 
 from pydantic import BaseModel, Field
@@ -8,7 +8,7 @@ from pydantic import BaseModel, Field
 from shared.models.documents import Chunk
 
 
-class QueryType(str, Enum):
+class QueryType(StrEnum):
     """Classification of a user query to determine retrieval strategy.
 
     The QueryAnalyzer (Day 11) assigns one of these types to every incoming
@@ -33,7 +33,8 @@ class Query(BaseModel):
         description="Classified type of the query (set by QueryAnalyzer).",
     )
     metadata: dict[str, Any] = Field(
-        default_factory=dict, description="Optional metadata (e.g. user_id, session_id)."
+        default_factory=dict,
+        description="Optional metadata (e.g. user_id, session_id).",
     )
 
 
@@ -56,9 +57,12 @@ class RetrievalResult(BaseModel):
         default_factory=list, description="Ranked list of scored chunks."
     )
     strategy_used: str = Field(
-        default="unknown", description="Which retrieval strategy produced these results."
+        default="unknown",
+        description="Which retrieval strategy produced these results.",
     )
-    latency_ms: float = Field(default=0.0, description="How long the retrieval took (ms).")
+    latency_ms: float = Field(
+        default=0.0, description="How long the retrieval took (ms)."
+    )
     iteration: int = Field(
         default=1, description="Which self-correction iteration this result belongs to."
     )

@@ -1,10 +1,12 @@
 """Tests for chunkers — including token_count and chunk_strategy metadata."""
 
 import pytest
-from shared.models import Document
 from deeprag.chunkers import (
-    SlidingWindowChunker, RecursiveCharacterChunker, SemanticParagraphChunker,
+    RecursiveCharacterChunker,
+    SemanticParagraphChunker,
+    SlidingWindowChunker,
 )
+from shared.models import Document
 
 
 @pytest.fixture
@@ -14,12 +16,20 @@ def empty_doc():
 
 @pytest.fixture
 def single_line_doc():
-    return Document(content="This is a very simple single line document.", metadata={"author": "AI"})
+    return Document(
+        content="This is a very simple single line document.", metadata={"author": "AI"}
+    )
 
 
 @pytest.fixture
 def large_doc():
-    text = "Paragraph 1 is here.\n\nParagraph 2 is right here.\n\nParagraph 3 is also here.\n\nParagraph 4 continues.\n\nParagraph 5 finishes up."
+    text = (
+        "Paragraph 1 is here.\n\n"
+        "Paragraph 2 is right here.\n\n"
+        "Paragraph 3 is also here.\n\n"
+        "Paragraph 4 continues.\n\n"
+        "Paragraph 5 finishes up."
+    )
     return Document(content=text, metadata={"author": "AI", "source": "test.txt"})
 
 

@@ -1,13 +1,13 @@
 """Generation and response models — including the abstention protocol."""
 
-from enum import Enum
+from enum import StrEnum
 from typing import Any
 from uuid import UUID
 
 from pydantic import BaseModel, Field
 
 
-class ResponseType(str, Enum):
+class ResponseType(StrEnum):
     """Outcome classification for a generated response.
 
     This is the abstention protocol — a first-class design decision defined
@@ -29,7 +29,9 @@ class Citation(BaseModel):
     """A reference linking an answer back to a specific source chunk."""
 
     chunk_id: UUID = Field(description="ID of the chunk this citation points to.")
-    text_span: str = Field(description="The quoted text from the chunk used in the answer.")
+    text_span: str = Field(
+        description="The quoted text from the chunk used in the answer."
+    )
     relevance_score: float = Field(
         default=0.0, description="How relevant this citation was (1–5 scale)."
     )
