@@ -17,6 +17,7 @@ class ProgressEventType(StrEnum):
     """Types of progress events emitted throughout the pipeline."""
 
     QUERY_RECEIVED = "query_received"
+    EMBEDDING_BATCH = "embedding_batch"
     RETRIEVAL_STARTED = "retrieval_started"
     RETRIEVAL_COMPLETE = "retrieval_complete"
     GRADING_STARTED = "grading_started"
