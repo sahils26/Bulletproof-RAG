@@ -1,16 +1,14 @@
 """Embedding service for converting text to vector representations."""
 
 import asyncio
-from typing import Any
 
 from sentence_transformers import SentenceTransformer
-
-from shared.models.events import ProgressEvent, ProgressEventType, ProgressCallback
+from shared.models.events import ProgressCallback, ProgressEvent, ProgressEventType
 
 
 class EmbeddingService:
     """Service to generate embeddings for chunks using sentence-transformers.
-    
+
     This service is designed to be efficient:
     - Lazy loading of the model (only loads into memory when first requested)
     - Batching support to avoid Out Of Memory (OOM) errors
@@ -32,11 +30,11 @@ class EmbeddingService:
         self, texts: list[str], callback: ProgressCallback | None = None
     ) -> list[list[float]]:
         """Embed a list of texts into vectors asynchronously.
-        
+
         Args:
             texts: List of strings to embed.
             callback: Optional callback to track batch progress.
-            
+
         Returns:
             List of embedding vectors (list of floats).
         """
@@ -49,21 +47,23 @@ class EmbeddingService:
 
         for i in range(0, len(texts), self.batch_size):
             batch_texts = texts[i : i + self.batch_size]
-            
+
             # SentenceTransformer.encode is synchronous and cpu/gpu intensive.
             # We run it in a thread executor to avoid blocking the asyncio event loop.
             batch_embeddings = await asyncio.to_thread(
                 model.encode, batch_texts, convert_to_numpy=False
             )
-            
+
             # Ensure it's a list of list of floats
             if isinstance(batch_embeddings, list):
                 # The numpy conversion returns list of tensors or floats
-                all_embeddings.extend([list(float(x) for x in emb) for emb in batch_embeddings]) # type: ignore
+                emb_list = [list(float(x) for x in emb) for emb in batch_embeddings]
+                all_embeddings.extend(emb_list)  # type: ignore
             else:
-                 # It might return a single tensor/array if batch is 1, but usually a 2D array
+                # It might return a single tensor/array if batch is 1,
+                # but usually a 2D array
                 all_embeddings.extend(batch_embeddings.tolist())
-            
+
             if callback:
                 current_batch = (i // self.batch_size) + 1
                 await callback(
