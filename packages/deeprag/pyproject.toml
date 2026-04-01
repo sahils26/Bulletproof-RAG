@@ -10,7 +10,13 @@ dependencies = [
     "pypdf>=6.9.2",
     "python-docx>=1.2.0",
     "sentence-transformers>=3.0.0",
+    "chromadb>=1.0.0",
+    "typer>=0.9.0",
+    "rich>=13.0.0",
 ]
+
+[project.scripts]
+deeprag = "deeprag.cli:app"
 
 [tool.uv.sources]
 shared = { workspace = true }
