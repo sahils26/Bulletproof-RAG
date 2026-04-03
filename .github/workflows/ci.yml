@@ -27,4 +27,4 @@ jobs:
         run: uv run mypy packages/
 
       - name: Tests (Pytest)
-        run: uv run pytest --tb=short
+        run: uv run pytest -m "not integration" --tb=short

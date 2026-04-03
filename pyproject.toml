@@ -38,3 +38,6 @@ python_version = "3.12"
 [tool.pytest.ini_options]
 testpaths = ["packages"]
 asyncio_mode = "auto"
+markers = [
+    "integration: marks tests as requiring external services like ChromaDB"
+]

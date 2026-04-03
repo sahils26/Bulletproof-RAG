@@ -88,8 +88,8 @@ class ChromaDBAdapter(VectorStore):
             col.upsert,
             ids=ids,
             documents=documents,
-            embeddings=embeddings,
-            metadatas=metadatas,
+            embeddings=embeddings,  # type: ignore
+            metadatas=metadatas,  # type: ignore
         )
 
         return len(chunks)
@@ -126,23 +126,28 @@ class ChromaDBAdapter(VectorStore):
             return scored_chunks
 
         for i, chunk_id in enumerate(results["ids"][0]):
-            meta = results["metadatas"][0][i] if results.get("metadatas") else {}
-            doc_text = results["documents"][0][i] if results.get("documents") else ""
-            distance = results["distances"][0][i] if results.get("distances") else 0.0
+            meta = results["metadatas"][0][i] if results.get("metadatas") else {}  # type: ignore
+            doc_text = results["documents"][0][i] if results.get("documents") else ""  # type: ignore
+            distance = results["distances"][0][i] if results.get("distances") else 0.0  # type: ignore
 
             # ChromaDB returns cosine distance (0 = identical, 2 = opposite).
             # We convert to a similarity score (1 = identical, -1 = opposite).
-            similarity = 1.0 - distance
+            similarity = 1.0 - float(distance)
+
+            # Safely parse metadata fields that might be mixed types according to Mypy
+            doc_id_val = str(
+                meta.get("document_id", "00000000-0000-0000-0000-000000000000")
+            )
+            chunk_idx_val = int(str(meta.get("chunk_index", 0)))
+            token_count_val = int(str(meta.get("token_count", 0)))
 
             chunk = Chunk(
-                id=UUID(chunk_id),
-                content=doc_text,
-                document_id=UUID(
-                    meta.get("document_id", "00000000-0000-0000-0000-000000000000")
-                ),
-                chunk_index=int(meta.get("chunk_index", 0)),
-                token_count=int(meta.get("token_count", 0)),
-                metadata=meta,
+                id=UUID(str(chunk_id)),
+                content=str(doc_text),
+                document_id=UUID(doc_id_val),
+                chunk_index=chunk_idx_val,
+                token_count=token_count_val,
+                metadata=dict(meta) if meta else {},  # type: ignore
             )
 
             scored_chunks.append(
@@ -184,9 +189,9 @@ class ChromaDBAdapter(VectorStore):
         if count > 0:
             all_meta = await asyncio.to_thread(col.get, include=["metadatas"])
             if all_meta and all_meta.get("metadatas"):
-                for meta in all_meta["metadatas"]:
+                for meta in all_meta["metadatas"]:  # type: ignore
                     if meta and "document_id" in meta:
-                        doc_ids.add(meta["document_id"])
+                        doc_ids.add(str(meta["document_id"]))
 
         return {
             "chunk_count": count,
