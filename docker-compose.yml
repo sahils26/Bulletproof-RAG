@@ -14,7 +14,7 @@ services:
   chromadb:
     image: chromadb/chroma:latest
     ports:
-      - "8000:8000"
+      - "8001:8000" # coz im running my slurm LLM on 8000 local port
     volumes:
       - chroma_data:/chroma/chroma
     healthcheck:

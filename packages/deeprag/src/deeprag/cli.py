@@ -60,7 +60,7 @@ def ingest(
         help="ChromaDB server hostname.",
     ),
     chromadb_port: int = typer.Option(
-        8000,
+        8001,
         "--chromadb-port",
         help="ChromaDB server port.",
     ),

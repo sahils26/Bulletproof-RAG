@@ -30,14 +30,33 @@ class ChromaDBAdapter(VectorStore):
     or Pinecone, we just write a new adapter — nothing else changes.
     """
 
-    def __init__(self, host: str = "localhost", port: int = 8000) -> None:
+    def __init__(self, host: str | None = None, port: int | None = None) -> None:
         """Connect to a running ChromaDB server.
 
-        Args:
-            host: ChromaDB server hostname.
-            port: ChromaDB server port.
+        If host/port are not provided, it looks for the VECTOR_URL environment
+        variable (e.g., http://localhost:8001).
         """
-        self._client = chromadb.HttpClient(host=host, port=port)
+        import os
+        from urllib.parse import urlparse
+
+        # 1. Start with defaults
+        final_host = host or "localhost"
+        final_port = port or 8001
+
+        # 2. Override with Environment Variable if no args provided
+        if host is None and port is None:
+            vector_url = os.getenv("VECTOR_URL")
+            if vector_url:
+                try:
+                    parsed = urlparse(vector_url)
+                    if parsed.hostname:
+                        final_host = parsed.hostname
+                    if parsed.port:
+                        final_port = parsed.port
+                except Exception:
+                    pass
+
+        self._client = chromadb.HttpClient(host=final_host, port=final_port)
 
     def _get_or_create_collection(self, name: str) -> chromadb.Collection:
         """Get existing collection or create a new one."""

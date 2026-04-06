@@ -13,14 +13,17 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 class LLMConfig(BaseSettings):
     """LLM provider configuration."""
 
-    provider: Literal["anthropic", "openai"] = Field(
+    provider: Literal["anthropic", "openai", "openai_compatible"] = Field(
         default="anthropic", description="Which LLM provider to use."
     )
     model: str = Field(
         default="claude-sonnet-4-20250514", description="Model identifier."
     )
-    api_key: SecretStr = Field(
-        default=SecretStr(""), description="API key (loaded from env)."
+    api_key: SecretStr | None = Field(
+        default=None, description="API key (loaded from env)."
+    )
+    base_url: str | None = Field(
+        default=None, description="Custom base URL for local LLMs via vLLM/Slurm."
     )
     max_tokens: int = Field(default=4096, description="Max tokens per response.")
     temperature: float = Field(default=0.0, description="Sampling temperature.")
