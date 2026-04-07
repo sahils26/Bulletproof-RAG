@@ -39,7 +39,7 @@ class LLMService:
 
     def __init__(self, config: LLMConfig):
         self.config = config
-        
+
         # Configure litellm globally if we are using an OpenAI-compatible
         # custom endpoint such as Slurm vLLM
         if config.provider == "openai_compatible" and config.base_url:
@@ -58,13 +58,15 @@ class LLMService:
     )
     async def _execute_call(self, messages: list[dict[str, Any]], **kwargs) -> Any:
         """Execute the actual API call with built-in retries."""
-        
-        # Litellm needs to know how to route the request. 
+
+        # Litellm needs to know how to route the request.
         # For generic OpenAI-compatible endpoints, we prefix with "openai/"
         model_str = self.config.model
-        if self.config.provider == "openai_compatible" and not model_str.startswith("openai/"):
+        if self.config.provider == "openai_compatible" and not model_str.startswith(
+            "openai/"
+        ):
             model_str = f"openai/{model_str}"
-            
+
         # Merge config defaults with overrides in kwargs
         call_kwargs = {
             "model": model_str,
@@ -93,7 +95,7 @@ class LLMService:
         """Call the LLM to generate a completion.
 
         Args:
-            messages: List of chat messages 
+            messages: List of chat messages
                 (OpenAI format: {"role": "...", "content": "..."}).
             callback: Optional ProgressCallback for event emitting.
             **kwargs: Extra parameters to pass to LiteLLM overrides (e.g. temperature).
@@ -113,7 +115,7 @@ class LLMService:
 
         # Parse Litellm response object
         content = response.choices[0].message.content or ""
-        
+
         # Safe extraction of token usage
         usage = response.get("usage", {})
         prompt_tokens = usage.get("prompt_tokens", 0) if usage else 0

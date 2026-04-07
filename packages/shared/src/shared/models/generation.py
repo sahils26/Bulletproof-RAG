@@ -40,6 +40,7 @@ class Citation(BaseModel):
 class GenerationResult(BaseModel):
     """The final answer returned to the user, with citations and confidence."""
 
+    query: str = Field(description="The original question asked by the user.")
     answer: str = Field(description="The generated response text.")
     response_type: ResponseType = Field(
         default=ResponseType.CONFIDENT,

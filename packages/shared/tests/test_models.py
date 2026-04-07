@@ -93,6 +93,7 @@ class TestRetrievalResult:
 class TestResponseType:
     def test_abstention_enum(self):
         result = GenerationResult(
+            query="mock question",
             answer="I don't know.",
             response_type=ResponseType.ABSTAINED,
             confidence=0.1,

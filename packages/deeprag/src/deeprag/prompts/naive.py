@@ -32,6 +32,6 @@ def format_context_chunks(chunks: list[ScoredChunk]) -> str:
         source = c.chunk.metadata.get("source", "Unknown Source")
         doc_id = c.chunk.document_id
         text = c.chunk.content.strip()
-        formatted.append(f"[Source {i+1} - {source} ({doc_id})]\n{text}\n")
+        formatted.append(f"[Source {i + 1} - {source} ({doc_id})]\n{text}\n")
 
     return "\n".join(formatted)

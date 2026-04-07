@@ -12,13 +12,21 @@ from shared.config import (
 
 
 class TestConfigDefaults:
-    def test_llm_defaults(self):
+    def test_llm_defaults(self, monkeypatch):
+        # Clear any environment variables that might be set locally
+        monkeypatch.delenv("LLM_PROVIDER", raising=False)
+        monkeypatch.delenv("LLM_MODEL", raising=False)
+        monkeypatch.delenv("LLM_BASE_URL", raising=False)
+
         cfg = LLMConfig()
         assert cfg.provider == "anthropic"
         assert cfg.max_tokens == 4096
         assert cfg.temperature == 0.0
 
-    def test_vector_store_defaults(self):
+    def test_vector_store_defaults(self, monkeypatch):
+        monkeypatch.delenv("VECTOR_URL", raising=False)
+        monkeypatch.delenv("VECTOR_BACKEND", raising=False)
+
         cfg = VectorStoreConfig()
         assert cfg.backend == "chromadb"
         assert cfg.url == "http://localhost:8000"
@@ -34,7 +42,10 @@ class TestConfigDefaults:
         assert cfg.relevance_threshold == 3.0
         assert cfg.enable_hallucination_check is True
 
-    def test_app_config_composes_all(self):
+    def test_app_config_composes_all(self, monkeypatch):
+        monkeypatch.delenv("LLM_PROVIDER", raising=False)
+        monkeypatch.delenv("VECTOR_URL", raising=False)
+
         cfg = AppConfig()
         assert cfg.llm.provider == "anthropic"
         assert cfg.vector_store.backend == "chromadb"

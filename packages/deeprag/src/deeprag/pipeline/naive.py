@@ -11,7 +11,7 @@ from typing import Any
 
 from shared.llm.service import LLMService
 from shared.models.events import ProgressCallback, ProgressEvent, ProgressEventType
-from shared.models.generation import GenerationResult, ResponseType, Citation
+from shared.models.generation import Citation, GenerationResult, ResponseType
 
 from deeprag.prompts.naive import (
     NAIVE_SYSTEM_PROMPT,
@@ -61,8 +61,7 @@ class NaiveRAGPipeline:
                 ProgressEvent(
                     event_type=ProgressEventType.RETRIEVAL_STARTED,
                     message=(
-                        f"Searching collection '{collection}' "
-                        f"for top {top_k} results."
+                        f"Searching collection '{collection}' for top {top_k} results."
                     ),
                 )
             )
@@ -81,9 +80,7 @@ class NaiveRAGPipeline:
 
         # Step 3: Format the prompt
         context_str = format_context_chunks(retrieval_res.chunks)
-        user_message = NAIVE_USER_PROMPT.format(
-            context=context_str, question=question
-        )
+        user_message = NAIVE_USER_PROMPT.format(context=context_str, question=question)
 
         messages: list[dict[str, Any]] = [
             {"role": "system", "content": NAIVE_SYSTEM_PROMPT},
