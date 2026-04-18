@@ -9,6 +9,7 @@ dependencies = [
     "agentguard",
     "eval-harness",
     "dashboard",
+    "datasets>=4.8.4",
 ]
 
 [tool.uv.sources]

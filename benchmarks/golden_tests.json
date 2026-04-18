@@ -1,0 +1,107 @@
+[
+  {
+    "id": 1,
+    "question": "In what centuries did the Normans give their name to Normandy?",
+    "expected_answer": "10th and 11th centuries",
+    "category": "factual",
+    "expected_response_type": "CONFIDENT"
+  },
+  {
+    "id": 2,
+    "question": "Who was the leader under whom the Normans agreed to swear fealty to West Francia?",
+    "expected_answer": "Rollo",
+    "category": "factual",
+    "expected_response_type": "CONFIDENT"
+  },
+  {
+    "id": 3,
+    "question": "Which French king did Rollo swear fealty to?",
+    "expected_answer": "King Charles III",
+    "category": "factual",
+    "expected_response_type": "CONFIDENT"
+  },
+  {
+    "id": 4,
+    "question": "What dialect or language did the Normans adopt after settling in Frankish land?",
+    "expected_answer": "Gallo-Romance language, known as Norman French.",
+    "category": "factual",
+    "expected_response_type": "CONFIDENT"
+  },
+  {
+    "id": 5,
+    "question": "What year did the Norman conquest of England occur?",
+    "expected_answer": "1066",
+    "category": "factual",
+    "expected_response_type": "CONFIDENT"
+  },
+  {
+    "id": 6,
+    "question": "What kingdom in southern Italy was founded by the descendants of Norse raiders from Denmark, Iceland, and Norway?",
+    "expected_answer": "Kingdom of Sicily",
+    "category": "multi_hop",
+    "expected_response_type": "CONFIDENT"
+  },
+  {
+    "id": 7,
+    "question": "Which duke from the people who originally evolved from Norse raiders led an expedition to conquer England?",
+    "expected_answer": "William the Conqueror",
+    "category": "multi_hop",
+    "expected_response_type": "CONFIDENT"
+  },
+  {
+    "id": 8,
+    "question": "How did the religious beliefs of the Norse raiders' descendants evolve after settling in France?",
+    "expected_answer": "They evolved to become exponents of Catholic orthodoxy and Christian piety.",
+    "category": "multi_hop",
+    "expected_response_type": "CONFIDENT"
+  },
+  {
+    "id": 9,
+    "question": "What was the difference in origin between the Normans and the native populations they eventually mixed with?",
+    "expected_answer": "The Normans descended from Norse raiders from Scandinavia, while the natives were Frankish and Roman-Gaulish populations.",
+    "category": "comparison",
+    "expected_response_type": "CONFIDENT"
+  },
+  {
+    "id": 10,
+    "question": "Which Norman leaders founded the Kingdom of Sicily and the Principality of Antioch respectively?",
+    "expected_answer": "Roger II founded the Kingdom of Sicily, and Bohemond I founded the Principality of Antioch.",
+    "category": "comparison",
+    "expected_response_type": "CONFIDENT"
+  },
+  {
+    "id": 11,
+    "question": "What is the capital of modern-day France?",
+    "expected_answer": "I don't have enough context to answer this based on the provided documents.",
+    "category": "ood",
+    "expected_response_type": "ABSTAINED"
+  },
+  {
+    "id": 12,
+    "question": "Who won the Super Bowl in 2020?",
+    "expected_answer": "I don't have enough context to answer this.",
+    "category": "ood",
+    "expected_response_type": "ABSTAINED"
+  },
+  {
+    "id": 13,
+    "question": "Tell me about the Norman conquest.",
+    "expected_answer": "The provided context mentions several Norman conquests, including the conquest of England led by William the Conqueror in 1066, and the conquest of southern Italy led by Roger II. Could you specify which one?",
+    "category": "adversarial",
+    "expected_response_type": "PARTIAL"
+  },
+  {
+    "id": 14,
+    "question": "What was the exact population of Normans in the 10th century?",
+    "expected_answer": "The provided context does not state the exact population of the Normans in the 10th century.",
+    "category": "adversarial",
+    "expected_response_type": "ABSTAINED"
+  },
+  {
+    "id": 15,
+    "question": "Who was the leader of the Franks who originally came from Iceland?",
+    "expected_answer": "The premise of the question is incorrect according to the context. It was not the Franks who came from Iceland, but the Norse raiders (who later became Normans) originally from Denmark, Iceland, and Norway. Their leader was Rollo.",
+    "category": "adversarial",
+    "expected_response_type": "CONFIDENT"
+  }
+]
