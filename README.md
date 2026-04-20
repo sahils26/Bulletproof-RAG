@@ -31,5 +31,3 @@ docker-compose up -d
 - `eval-harness/`: CI/CD evaluation logic.
 - `dashboard/`: Real-time monitoring UI.
 
-## 📜 License
-MIT
