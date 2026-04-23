@@ -2,10 +2,11 @@
   "metadata": {
     "model_used": "Qwen/Qwen2.5-32B-Instruct-AWQ",
     "total_questions": 15,
-    "average_latency_ms": 13188.89,
-    "average_tokens": 821.27,
+    "average_latency_ms": 10841.13,
+    "average_tokens": 668.07,
     "total_cost_usd": 0.0,
-    "accuracy": null
+    "accuracy": 60.0,
+    "accuracy_fraction": "9/15"
   },
   "results": [
     {
@@ -16,36 +17,36 @@
       "expected_response_type": "CONFIDENT",
       "actual_answer": "The Normans gave their name to Normandy in the 10th and 11th centuries. [Source 1]",
       "actual_response_type": "confident",
-      "latency_ms": 19524.89,
-      "total_tokens": 731,
+      "latency_ms": 14872.5,
+      "total_tokens": 728,
       "chunks_retrieved": 3,
-      "manual_accuracy": null
+      "manual_accuracy": 1
     },
     {
       "id": 2,
       "category": "factual",
-      "question": "Who was the leader under whom the Normans agreed to swear fealty to West Francia?",
-      "expected_answer": "Rollo",
+      "question": "What is the primary focus of computational complexity theory?",
+      "expected_answer": "Classifying computational problems according to their inherent difficulty.",
       "expected_response_type": "CONFIDENT",
-      "actual_answer": "Under their leader Rollo, the Normans agreed to swear fealty to King Charles III of West Francia. [Source 1]",
+      "actual_answer": "The primary focus of computational complexity theory is classifying computational problems according to their inherent difficulty, and relating those classes to each other. [Source 1]",
       "actual_response_type": "confident",
-      "latency_ms": 7660.81,
-      "total_tokens": 808,
+      "latency_ms": 8312.61,
+      "total_tokens": 450,
       "chunks_retrieved": 3,
-      "manual_accuracy": null
+      "manual_accuracy": 1
     },
     {
       "id": 3,
       "category": "factual",
-      "question": "Which French king did Rollo swear fealty to?",
-      "expected_answer": "King Charles III",
+      "question": "Which city is the most populous in Southern California?",
+      "expected_answer": "Los Angeles",
       "expected_response_type": "CONFIDENT",
-      "actual_answer": "King Charles III of West Francia. [Source 2]",
+      "actual_answer": "The most populous city in Southern California is Los Angeles, with a population of 3,792,621. [Source 1]",
       "actual_response_type": "confident",
-      "latency_ms": 4390.76,
-      "total_tokens": 759,
+      "latency_ms": 8259.94,
+      "total_tokens": 666,
       "chunks_retrieved": 3,
-      "manual_accuracy": null
+      "manual_accuracy": 1
     },
     {
       "id": 4,
@@ -53,90 +54,90 @@
       "question": "What dialect or language did the Normans adopt after settling in Frankish land?",
       "expected_answer": "Gallo-Romance language, known as Norman French.",
       "expected_response_type": "CONFIDENT",
-      "actual_answer": "The Normans adopted the Gallo-Romance language of the local Frankish people after settling in Frankish land. This led to the creation of the Norman language, which was formed when the indigenous langue d'o\u00efl branch of Romance was adopted by the Norse-speaking ruling class. [Source 1]",
+      "actual_answer": "The Normans adopted the Gallo-Romance language of the local Frankish people after settling in Frankish land. This led to the creation of the Norman language, which was formed when the indigenous langue d'oïl branch of Romance was adopted by the Norse-speaking ruling class. [Source 1]",
       "actual_response_type": "confident",
-      "latency_ms": 15471.26,
-      "total_tokens": 779,
+      "latency_ms": 15871.02,
+      "total_tokens": 781,
       "chunks_retrieved": 3,
-      "manual_accuracy": null
+      "manual_accuracy": 1
     },
     {
       "id": 5,
       "category": "factual",
-      "question": "What year did the Norman conquest of England occur?",
-      "expected_answer": "1066",
+      "question": "In computational complexity theory, what defines a 'hard' problem?",
+      "expected_answer": "A problem is considered hard if its solution requires significant resources, whatever the algorithm used.",
       "expected_response_type": "CONFIDENT",
-      "actual_answer": "The Norman conquest of England occurred in 1066. [Source 1]",
+      "actual_answer": "In computational complexity theory, a 'hard' problem is one that is regarded as inherently difficult because its solution requires significant resources, regardless of the algorithm used. These resources can include time, storage, communication, the number of gates in a circuit, or the number of processors, among others. [Source 3]",
       "actual_response_type": "confident",
-      "latency_ms": 5328.04,
-      "total_tokens": 886,
+      "latency_ms": 15978.82,
+      "total_tokens": 734,
       "chunks_retrieved": 3,
-      "manual_accuracy": null
+      "manual_accuracy": 1
     },
     {
       "id": 6,
       "category": "multi_hop",
-      "question": "What kingdom in southern Italy was founded by the descendants of Norse raiders from Denmark, Iceland, and Norway?",
-      "expected_answer": "Kingdom of Sicily",
-      "expected_response_type": "CONFIDENT",
-      "actual_answer": "I'm sorry, I don't have enough information in my knowledge base to answer that.",
+      "question": "How did the founders of the Kingdom of Sicily impact the development of polynomial time algorithms?",
+      "expected_answer": "There is no connection. The founders of Sicily were Normans in the 11th century, while polynomial time algorithms are a modern concept in computational complexity theory.",
+      "expected_response_type": "ABSTAINED",
+      "actual_answer": "I'm sorry, I don't have enough information in my knowledge base to answer that. The provided context does not contain any information about the founders of the Kingdom of Sicily or their impact on the development of polynomial time algorithms.",
       "actual_response_type": "confident",
-      "latency_ms": 5210.58,
-      "total_tokens": 871,
+      "latency_ms": 11981.08,
+      "total_tokens": 604,
       "chunks_retrieved": 3,
-      "manual_accuracy": null
+      "manual_accuracy": 0
     },
     {
       "id": 7,
       "category": "multi_hop",
-      "question": "Which duke from the people who originally evolved from Norse raiders led an expedition to conquer England?",
-      "expected_answer": "William the Conqueror",
+      "question": "Compare the geographic scale of Southern California to the areas conquered by William the Conqueror.",
+      "expected_answer": "Southern California is a modern geographic region. William the Conqueror conquered England in 1066. To answer fully the system must accurately pull facts about both places.",
       "expected_response_type": "CONFIDENT",
-      "actual_answer": "Duke William II of Normandy, from the people who originally evolved from Norse raiders, led the expedition that conquered England in 1066. [Source 2]",
+      "actual_answer": "I'm sorry, I don't have enough information in my knowledge base to answer that. The provided context does not contain any information about the areas conquered by William the Conqueror, only details about the geographic and demographic aspects of Southern California.",
       "actual_response_type": "confident",
-      "latency_ms": 9623.63,
-      "total_tokens": 784,
+      "latency_ms": 12893.01,
+      "total_tokens": 915,
       "chunks_retrieved": 3,
-      "manual_accuracy": null
+      "manual_accuracy": 0
     },
     {
       "id": 8,
       "category": "multi_hop",
-      "question": "How did the religious beliefs of the Norse raiders' descendants evolve after settling in France?",
-      "expected_answer": "They evolved to become exponents of Catholic orthodoxy and Christian piety.",
-      "expected_response_type": "CONFIDENT",
-      "actual_answer": "The descendants of the Norse raiders, including those of Rollo's Vikings, replaced their Norse religion with Catholicism (Christianity) as they assimilated into the Frankish and Roman-Gaulish populations in Normandy. This transformation was part of a broader cultural synthesis that blended Old Norse traditions with the existing Gallo-Romance culture. [Source 2]",
+      "question": "Are the computational resources required for an NP-hard problem related to the population demographics of Los Angeles?",
+      "expected_answer": "No, computational resources and city demographics are completely unrelated.",
+      "expected_response_type": "ABSTAINED",
+      "actual_answer": "I'm sorry, I don't have enough information in my knowledge base to answer that.\nThe context provided discusses computational complexity theory and the population demographics of Southern California, including Los Angeles. However, it does not provide any direct relationship or analysis linking the computational resources required for NP-hard problems to the population demographics of Los Angeles. Therefore, based solely on the given context, no definitive answer can be provided.",
       "actual_response_type": "confident",
-      "latency_ms": 18851.74,
-      "total_tokens": 827,
+      "latency_ms": 20382.5,
+      "total_tokens": 863,
       "chunks_retrieved": 3,
-      "manual_accuracy": null
+      "manual_accuracy": 0
     },
     {
       "id": 9,
       "category": "comparison",
-      "question": "What was the difference in origin between the Normans and the native populations they eventually mixed with?",
-      "expected_answer": "The Normans descended from Norse raiders from Scandinavia, while the natives were Frankish and Roman-Gaulish populations.",
+      "question": "How does the concept of a 'decision problem' differ from the historical decisions made by King Charles III?",
+      "expected_answer": "A decision problem is a computational problem that can be posed as a yes-no question of the input values. King Charles III's historical decisions related to granting land to Normans in West Francia.",
       "expected_response_type": "CONFIDENT",
-      "actual_answer": "The Normans were descended from Norse raiders and pirates from Denmark, Iceland, and Norway. They eventually mixed with the native Frankish and Roman-Gaulish populations of West Francia, which had roots tracing back to the Franks of the Carolingian dynasty. This mixture led to the gradual merging of their distinct cultural and ethnic identities. [Source 1]",
+      "actual_answer": "I'm sorry, I don't have enough information in my knowledge base to answer that. The provided context focuses on the computational theory aspect of decision problems and does not contain any information about historical decisions made by King Charles III.",
       "actual_response_type": "confident",
-      "latency_ms": 18632.84,
-      "total_tokens": 820,
+      "latency_ms": 12180.94,
+      "total_tokens": 816,
       "chunks_retrieved": 3,
-      "manual_accuracy": null
+      "manual_accuracy": 0
     },
     {
       "id": 10,
       "category": "comparison",
-      "question": "Which Norman leaders founded the Kingdom of Sicily and the Principality of Antioch respectively?",
-      "expected_answer": "Roger II founded the Kingdom of Sicily, and Bohemond I founded the Principality of Antioch.",
-      "expected_response_type": "CONFIDENT",
-      "actual_answer": "The Kingdom of Sicily was founded by Roger II, while the Principality of Antioch was founded by Bohemond I. [Source 1]",
+      "question": "Does Southern California or Normandy feature more prominently in computational complexity theory?",
+      "expected_answer": "Neither features in computational complexity theory.",
+      "expected_response_type": "ABSTAINED",
+      "actual_answer": "I'm sorry, I don't have enough information in my knowledge base to answer that.",
       "actual_response_type": "confident",
-      "latency_ms": 8710.52,
-      "total_tokens": 944,
+      "latency_ms": 5000.8,
+      "total_tokens": 647,
       "chunks_retrieved": 3,
-      "manual_accuracy": null
+      "manual_accuracy": 0
     },
     {
       "id": 11,
@@ -146,10 +147,10 @@
       "expected_response_type": "ABSTAINED",
       "actual_answer": "I'm sorry, I don't have enough information in my knowledge base to answer that.",
       "actual_response_type": "confident",
-      "latency_ms": 5106.87,
-      "total_tokens": 858,
+      "latency_ms": 5035.81,
+      "total_tokens": 855,
       "chunks_retrieved": 3,
-      "manual_accuracy": null
+      "manual_accuracy": 1
     },
     {
       "id": 12,
@@ -159,49 +160,49 @@
       "expected_response_type": "ABSTAINED",
       "actual_answer": "I'm sorry, I don't have enough information in my knowledge base to answer that.",
       "actual_response_type": "confident",
-      "latency_ms": 5328.19,
-      "total_tokens": 1082,
+      "latency_ms": 5427.24,
+      "total_tokens": 347,
       "chunks_retrieved": 3,
-      "manual_accuracy": null
+      "manual_accuracy": 1
     },
     {
       "id": 13,
       "category": "adversarial",
-      "question": "Tell me about the Norman conquest.",
-      "expected_answer": "The provided context mentions several Norman conquests, including the conquest of England led by William the Conqueror in 1066, and the conquest of southern Italy led by Roger II. Could you specify which one?",
+      "question": "Tell me about the complexity of the Norman conquest happening in Southern California.",
+      "expected_answer": "The Norman conquest happened in Europe (England/Italy), not in Southern California. The premise is flawed.",
       "expected_response_type": "PARTIAL",
-      "actual_answer": "The Norman conquest refers to the invasion and subsequent domination of England by the Normans, led by Duke William II of Normandy, in 1066. This pivotal event occurred when William invaded England and defeated King Harold II at the Battle of Hastings. Following this victory, the Normans and their descendants supplanted the Anglo-Saxons as the ruling elite in England. The Normans integrated into a shared cultural sphere, and many members of the English nobility owned lands on both sides of the English Channel. Initially, the Norman kings of England, who were also Dukes of Normandy, owed allegiance to the King of France for their continental territories. However, they viewed England as their most significant possession, which came with the prestigious title of King. [Source 1]",
+      "actual_answer": "I'm sorry, I don't have enough information in my knowledge base to answer that. The provided context does not contain any information regarding the Norman conquest in Southern California. The Normans were historically active in regions such as France and England, but there is no mention of their activities in Southern California within the given sources.",
       "actual_response_type": "confident",
-      "latency_ms": 38848.07,
-      "total_tokens": 592,
+      "latency_ms": 16176.89,
+      "total_tokens": 383,
       "chunks_retrieved": 3,
-      "manual_accuracy": null
+      "manual_accuracy": 1
     },
     {
       "id": 14,
       "category": "adversarial",
-      "question": "What was the exact population of Normans in the 10th century?",
-      "expected_answer": "The provided context does not state the exact population of the Normans in the 10th century.",
+      "question": "What was the exact population of Normans in the 10th century living in Los Angeles?",
+      "expected_answer": "Los Angeles is in Southern California and was not inhabited by Normans in the 10th century.",
       "expected_response_type": "ABSTAINED",
       "actual_answer": "I'm sorry, I don't have enough information in my knowledge base to answer that.",
       "actual_response_type": "confident",
-      "latency_ms": 5295.68,
-      "total_tokens": 652,
+      "latency_ms": 5126.91,
+      "total_tokens": 502,
       "chunks_retrieved": 3,
-      "manual_accuracy": null
+      "manual_accuracy": 1
     },
     {
       "id": 15,
       "category": "adversarial",
-      "question": "Who was the leader of the Franks who originally came from Iceland?",
-      "expected_answer": "The premise of the question is incorrect according to the context. It was not the Franks who came from Iceland, but the Norse raiders (who later became Normans) originally from Denmark, Iceland, and Norway. Their leader was Rollo.",
+      "question": "Explain how the P vs NP problem was solved by Rollo.",
+      "expected_answer": "Rollo was a 10th-century Viking leader who became the first ruler of Normandy. He had nothing to do with the P vs NP problem in computer science.",
       "expected_response_type": "CONFIDENT",
-      "actual_answer": "I'm sorry, I don't have enough information in my knowledge base to answer that.\nThe context provided does not mention a leader of the Franks who originated from Iceland. The Normans, who had leaders from Nordic regions including Iceland, were distinguished from the Franks, who were the original inhabitants of the regions in West Francia. Rollo, a significant leader among the Normans, was from the Nordic regions and led the contingent that eventually settled in Normandy, but he was not specifically described as a leader of the Franks. [Source 2] [Source 3]",
+      "actual_answer": "I'm sorry, I don't have enough information in my knowledge base to answer that.",
       "actual_response_type": "confident",
-      "latency_ms": 29849.49,
-      "total_tokens": 926,
+      "latency_ms": 5116.87,
+      "total_tokens": 730,
       "chunks_retrieved": 3,
-      "manual_accuracy": null
+      "manual_accuracy": 0
     }
   ]
 }

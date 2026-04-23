@@ -10,6 +10,7 @@ This establishes our baseline.
 from typing import Any
 
 from shared.llm.service import LLMService
+from shared.logging import get_logger
 from shared.models.events import ProgressCallback, ProgressEvent, ProgressEventType
 from shared.models.generation import Citation, GenerationResult, ResponseType
 
@@ -27,6 +28,7 @@ class NaiveRAGPipeline:
     def __init__(self, retriever: NaiveRetriever, llm: LLMService):
         self._retriever = retriever
         self._llm = llm
+        self._log = get_logger("naive_pipeline")
 
     async def query(
         self,
@@ -68,6 +70,11 @@ class NaiveRAGPipeline:
 
         retrieval_res = await self._retriever.retrieve(
             query=question, collection=collection, top_k=top_k
+        )
+        self._log.info(
+            "retrieval_done",
+            question=question[:80],
+            chunks_found=len(retrieval_res.chunks),
         )
 
         if callback:
@@ -112,6 +119,13 @@ class NaiveRAGPipeline:
                 "output_tokens": llm_response.output_tokens,
                 "model": llm_response.model_name,
             },
+        )
+        self._log.info(
+            "query_complete",
+            response_type=result.response_type.value,
+            citations=len(result.citations),
+            input_tokens=llm_response.input_tokens,
+            output_tokens=llm_response.output_tokens,
         )
 
         if callback:

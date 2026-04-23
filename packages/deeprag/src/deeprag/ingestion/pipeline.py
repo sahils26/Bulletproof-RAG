@@ -15,6 +15,7 @@ import os
 import time
 from dataclasses import dataclass, field
 
+from shared.logging import get_logger
 from shared.models.documents import Chunk, Document
 from shared.models.events import (
     ProgressCallback,
@@ -31,6 +32,8 @@ from deeprag.chunkers import (
 from deeprag.embeddings.service import EmbeddingService
 from deeprag.loaders import LoaderRegistry, UnsupportedFileTypeError, default_registry
 from deeprag.vectorstore.base import VectorStore
+
+_log = get_logger("ingestion")
 
 
 @dataclass
@@ -137,6 +140,11 @@ async def run_ingestion(
             continue
 
     result.document_count = len(all_documents)
+    _log.info(
+        "documents_loaded",
+        count=len(all_documents),
+        failed=len(result.failed_files),
+    )
 
     if callback:
         await callback(
@@ -179,6 +187,12 @@ async def run_ingestion(
     # ── Step 5: Upsert into vector store ────────────────────
     upserted = await vector_store.upsert(all_chunks, collection)
     result.chunk_count = upserted
+    _log.info(
+        "ingestion_complete",
+        documents=result.document_count,
+        chunks=result.chunk_count,
+        failed_files=len(result.failed_files),
+    )
 
     if callback:
         await callback(

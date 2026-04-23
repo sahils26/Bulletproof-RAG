@@ -5,6 +5,7 @@ or a local Slurm cluster running vLLM). It provides built-in exponential
 backoff for rate limits and tracks token usage.
 """
 
+import time
 from typing import Any
 
 import litellm
@@ -17,6 +18,7 @@ from tenacity import (
 )
 
 from shared.config import LLMConfig
+from shared.logging import get_logger
 from shared.models.events import ProgressCallback, ProgressEvent, ProgressEventType
 
 
@@ -39,6 +41,7 @@ class LLMService:
 
     def __init__(self, config: LLMConfig):
         self.config = config
+        self._log = get_logger("llm")
 
         # Configure litellm globally if we are using an OpenAI-compatible
         # custom endpoint such as Slurm vLLM
@@ -111,7 +114,9 @@ class LLMService:
                 )
             )
 
+        call_start = time.time()
         response = await self._execute_call(messages, **kwargs)
+        call_duration_ms = (time.time() - call_start) * 1000
 
         # Parse Litellm response object
         content = response.choices[0].message.content or ""
@@ -121,10 +126,20 @@ class LLMService:
         prompt_tokens = usage.get("prompt_tokens", 0) if usage else 0
         completion_tokens = usage.get("completion_tokens", 0) if usage else 0
 
+        model_name = response.get("model", self.config.model)
+
+        self._log.info(
+            "llm_call_complete",
+            model=model_name,
+            input_tokens=prompt_tokens,
+            output_tokens=completion_tokens,
+            latency_ms=round(call_duration_ms, 1),
+        )
+
         # Create our clean internal response
         return LLMResponse(
             content=content,
             input_tokens=prompt_tokens,
             output_tokens=completion_tokens,
-            model_name=response.get("model", self.config.model),
+            model_name=model_name,
         )
