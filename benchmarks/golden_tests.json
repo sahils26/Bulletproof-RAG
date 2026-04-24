@@ -1,106 +1,211 @@
 [
   {
     "id": 1,
-    "question": "In what centuries did the Normans give their name to Normandy?",
-    "expected_answer": "10th and 11th centuries",
+    "question": "When did the Norman Conquest of England begin?",
+    "expected_answer": "1066",
     "category": "factual",
     "expected_response_type": "CONFIDENT"
   },
   {
     "id": 2,
-    "question": "What is the primary focus of computational complexity theory?",
+    "question": "What is the fundamental focus of computational complexity theory?",
     "expected_answer": "Classifying computational problems according to their inherent difficulty.",
     "category": "factual",
     "expected_response_type": "CONFIDENT"
   },
   {
     "id": 3,
-    "question": "Which city is the most populous in Southern California?",
-    "expected_answer": "Los Angeles",
+    "question": "Which mountain ranges are part of the Transverse Ranges in Southern California?",
+    "expected_answer": "Santa Ynez, Santa Monica, San Gabriel, and San Bernardino Mountains.",
     "category": "factual",
     "expected_response_type": "CONFIDENT"
   },
   {
     "id": 4,
-    "question": "What dialect or language did the Normans adopt after settling in Frankish land?",
-    "expected_answer": "Gallo-Romance language, known as Norman French.",
+    "question": "Who was the commander of the Apollo 11 mission?",
+    "expected_answer": "Neil Armstrong",
     "category": "factual",
     "expected_response_type": "CONFIDENT"
   },
   {
     "id": 5,
-    "question": "In computational complexity theory, what defines a 'hard' problem?",
-    "expected_answer": "A problem is considered hard if its solution requires significant resources, whatever the algorithm used.",
+    "question": "What is the primary role of white blood cells in the immune system?",
+    "expected_answer": "They help protect the body against infectious diseases and foreign invaders.",
     "category": "factual",
     "expected_response_type": "CONFIDENT"
   },
   {
     "id": 6,
-    "question": "How did the founders of the Kingdom of Sicily impact the development of polynomial time algorithms?",
-    "expected_answer": "There is no connection. The founders of Sicily were Normans in the 11th century, while polynomial time algorithms are a modern concept in computational complexity theory.",
-    "category": "multi_hop",
-    "expected_response_type": "ABSTAINED"
+    "question": "At what battle did William the Conqueror defeat King Harold Godwinson?",
+    "expected_answer": "Battle of Hastings",
+    "category": "factual",
+    "expected_response_type": "CONFIDENT"
   },
   {
     "id": 7,
-    "question": "Compare the geographic scale of Southern California to the areas conquered by William the Conqueror.",
-    "expected_answer": "Southern California is a modern geographic region. William the Conqueror conquered England in 1066. To answer fully the system must accurately pull facts about both places.",
-    "category": "multi_hop",
+    "question": "In complexity theory, what defines the class NP?",
+    "expected_answer": "The class of decision problems for which a given 'yes' solution can be verified as correct in polynomial time by a deterministic Turing machine.",
+    "category": "factual",
     "expected_response_type": "CONFIDENT"
   },
   {
     "id": 8,
-    "question": "Are the computational resources required for an NP-hard problem related to the population demographics of Los Angeles?",
-    "expected_answer": "No, computational resources and city demographics are completely unrelated.",
-    "category": "multi_hop",
-    "expected_response_type": "ABSTAINED"
+    "question": "What is the population of the Los Angeles metropolitan area?",
+    "expected_answer": "Over 13 million people.",
+    "category": "factual",
+    "expected_response_type": "CONFIDENT"
   },
   {
     "id": 9,
-    "question": "How does the concept of a 'decision problem' differ from the historical decisions made by King Charles III?",
-    "expected_answer": "A decision problem is a computational problem that can be posed as a yes-no question of the input values. King Charles III's historical decisions related to granting land to Normans in West Francia.",
-    "category": "comparison",
+    "question": "Which spacecraft served as the command module for Apollo 11?",
+    "expected_answer": "Columbia",
+    "category": "factual",
     "expected_response_type": "CONFIDENT"
   },
   {
     "id": 10,
-    "question": "Does Southern California or Normandy feature more prominently in computational complexity theory?",
-    "expected_answer": "Neither features in computational complexity theory.",
+    "question": "What is an autoimmune disease?",
+    "expected_answer": "A condition in which your immune system mistakenly attacks your body.",
+    "category": "factual",
+    "expected_response_type": "CONFIDENT"
+  },
+  {
+    "id": 11,
+    "question": "How did the death of Edward the Confessor trigger the sequence of events leading to the Battle of Hastings?",
+    "expected_answer": "Edward died childless, leading to a succession crisis between Harold Godwinson, Harald Hardrada, and William of Normandy, culminating in William's invasion.",
+    "category": "multi_hop",
+    "expected_response_type": "CONFIDENT"
+  },
+  {
+    "id": 12,
+    "question": "How does the concept of NP-completeness relate to the P versus NP problem?",
+    "expected_answer": "NP-complete problems are the hardest problems in NP. If any NP-complete problem can be solved in polynomial time (P), then all problems in NP can be, meaning P = NP.",
+    "category": "multi_hop",
+    "expected_response_type": "CONFIDENT"
+  },
+  {
+    "id": 13,
+    "question": "Describe the relationship between the climate of Southern California and its major agricultural outputs.",
+    "expected_answer": "The Mediterranean climate allows for year-round growing seasons, supporting crops like citrus, avocados, and grapes.",
+    "category": "multi_hop",
+    "expected_response_type": "CONFIDENT"
+  },
+  {
+    "id": 14,
+    "question": "What sequence of maneuvers did the Apollo 11 lunar module have to execute between undocking and touching down on the lunar surface?",
+    "expected_answer": "Separation, descent orbit insertion, powered descent initiation, pitch over, and final approach.",
+    "category": "multi_hop",
+    "expected_response_type": "CONFIDENT"
+  },
+  {
+    "id": 15,
+    "question": "How do B cells and T cells work together to create immunological memory?",
+    "expected_answer": "After initial infection, some B and T cells survive as memory cells, allowing for a faster and stronger response if the same pathogen is encountered again.",
+    "category": "multi_hop",
+    "expected_response_type": "CONFIDENT"
+  },
+  {
+    "id": 16,
+    "question": "Compare the technological complexity of orchestrating the Apollo 11 moon landing to the theoretical difficulty of solving an NP-hard problem.",
+    "expected_answer": "Apollo 11 was an immense engineering challenge, but solvable with known physics. NP-hard problems are mathematically unproven to have efficient algorithmic solutions.",
+    "category": "comparison",
+    "expected_response_type": "CONFIDENT"
+  },
+  {
+    "id": 17,
+    "question": "Is there a geographic connection between the climate of Southern California and the environment where the Norman Conquest took place?",
+    "expected_answer": "No. Southern California has a Mediterranean climate, while England/Normandy has a temperate maritime climate.",
+    "category": "comparison",
+    "expected_response_type": "CONFIDENT"
+  },
+  {
+    "id": 18,
+    "question": "Compare the timeline of the Norman Conquest to the timeline of the Apollo 11 mission. How many centuries apart were they?",
+    "expected_answer": "The Norman Conquest was in 1066. Apollo 11 was in 1969. They are roughly 9 centuries (900 years) apart.",
+    "category": "comparison",
+    "expected_response_type": "CONFIDENT"
+  },
+  {
+    "id": 19,
+    "question": "Could a malfunction in the Apollo 11 guidance computer be classified as an autoimmune response?",
+    "expected_answer": "No. An autoimmune response is a biological mechanism in living organisms. The Apollo 11 computer is a machine.",
+    "category": "comparison",
+    "expected_response_type": "CONFIDENT"
+  },
+  {
+    "id": 20,
+    "question": "Does computational complexity theory have any application in modeling the behavior of the human immune system?",
+    "expected_answer": "I don't have enough information in the provided text to explicitly confirm or deny computational modeling of the immune system.",
     "category": "comparison",
     "expected_response_type": "ABSTAINED"
   },
   {
-    "id": 11,
-    "question": "What is the capital of modern-day France?",
-    "expected_answer": "I don't have enough context to answer this based on the provided documents.",
-    "category": "ood",
-    "expected_response_type": "ABSTAINED"
-  },
-  {
-    "id": 12,
-    "question": "Who won the Super Bowl in 2020?",
+    "id": 21,
+    "question": "What is the recipe for traditional Italian carbonara?",
     "expected_answer": "I don't have enough context to answer this.",
     "category": "ood",
     "expected_response_type": "ABSTAINED"
   },
   {
-    "id": 13,
-    "question": "Tell me about the complexity of the Norman conquest happening in Southern California.",
-    "expected_answer": "The Norman conquest happened in Europe (England/Italy), not in Southern California. The premise is flawed.",
-    "category": "adversarial",
-    "expected_response_type": "PARTIAL"
-  },
-  {
-    "id": 14,
-    "question": "What was the exact population of Normans in the 10th century living in Los Angeles?",
-    "expected_answer": "Los Angeles is in Southern California and was not inhabited by Normans in the 10th century.",
-    "category": "adversarial",
+    "id": 22,
+    "question": "Who won the Best Actor Oscar in 1994?",
+    "expected_answer": "I don't have enough context to answer this.",
+    "category": "ood",
     "expected_response_type": "ABSTAINED"
   },
   {
-    "id": 15,
-    "question": "Explain how the P vs NP problem was solved by Rollo.",
-    "expected_answer": "Rollo was a 10th-century Viking leader who became the first ruler of Normandy. He had nothing to do with the P vs NP problem in computer science.",
+    "id": 23,
+    "question": "What are the rules of cricket?",
+    "expected_answer": "I don't have enough context to answer this.",
+    "category": "ood",
+    "expected_response_type": "ABSTAINED"
+  },
+  {
+    "id": 24,
+    "question": "Explain the plot of the novel 1984 by George Orwell.",
+    "expected_answer": "I don't have enough context to answer this.",
+    "category": "ood",
+    "expected_response_type": "ABSTAINED"
+  },
+  {
+    "id": 25,
+    "question": "How do you change a flat tire on a 2018 Honda Civic?",
+    "expected_answer": "I don't have enough context to answer this.",
+    "category": "ood",
+    "expected_response_type": "ABSTAINED"
+  },
+  {
+    "id": 26,
+    "question": "How did William the Conqueror utilize computational complexity theory to plan the Battle of Hastings?",
+    "expected_answer": "He didn't. Computational complexity theory is a modern computer science concept that did not exist in 1066.",
+    "category": "adversarial",
+    "expected_response_type": "CONFIDENT"
+  },
+  {
+    "id": 27,
+    "question": "Was Neil Armstrong the first person to discover Southern California?",
+    "expected_answer": "No. Southern California was inhabited by indigenous peoples long before European contact, and Neil Armstrong was an astronaut known for walking on the moon.",
+    "category": "adversarial",
+    "expected_response_type": "CONFIDENT"
+  },
+  {
+    "id": 28,
+    "question": "Explain how the immune system defends against NP-complete problems.",
+    "expected_answer": "It doesn't. The immune system defends against biological pathogens, not mathematical problems.",
+    "category": "adversarial",
+    "expected_response_type": "CONFIDENT"
+  },
+  {
+    "id": 29,
+    "question": "Describe the role of the Apollo 11 command module in the Norman Conquest.",
+    "expected_answer": "The Apollo 11 command module played no role in the Norman Conquest, as they are separated by nearly 900 years.",
+    "category": "adversarial",
+    "expected_response_type": "CONFIDENT"
+  },
+  {
+    "id": 30,
+    "question": "Are white blood cells more populous in Southern California than in Northern California?",
+    "expected_answer": "White blood cells are microscopic cells inside human bodies, not demographic populations measured by geographic region.",
     "category": "adversarial",
     "expected_response_type": "CONFIDENT"
   }
